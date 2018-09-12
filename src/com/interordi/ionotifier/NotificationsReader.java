@@ -14,7 +14,7 @@ import com.interordi.ionotifier.IONotifier;
 public class NotificationsReader implements Runnable {
 	
 	private IONotifier plugin;
-	private String file = "plugins/ionotifier/notifications.txt";
+	private String file = "plugins/IONotifier/notifications.txt";
 	
 	
 	public NotificationsReader(IONotifier plugin) {

@@ -3,12 +3,11 @@ package com.interordi.ionotifier;
 import java.util.Queue;
 import java.util.LinkedList;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.FileOutputStream;
-
-import com.interordi.ionotifier.IONotifier;
 
 
 public class NotificationsReader implements Runnable {
@@ -25,14 +24,22 @@ public class NotificationsReader implements Runnable {
 	//Read notifications
 	public void run() {
 		
-		Queue<String> notifications = new LinkedList<String>();
+		Queue< String > notifications = new LinkedList< String >();
 
 		//Get the current notifications from the text file, if any
 		FileReader input = null;
 		try {
 			input = new FileReader(file);
 		} catch (FileNotFoundException e) {
-			plugin.getLogger().info("Notifications file not found!");
+			
+			try {
+				File statsFile = new File(file);
+				statsFile.createNewFile();
+				System.out.println("Notifications file created");
+			} catch (IOException e2) {
+				System.err.println("Failed to create the notifications file");
+			}
+			//Either we just created the file, or we couldn't. Either way, nothing more to do!
 			return;
 		}
 		
